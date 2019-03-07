@@ -14,27 +14,17 @@ function y = pixel_disp(src_segment, search_window)
     dif=zeros(sw_width,sw_height);
     dif(:,:)=-1;
     
-    %set of variables to store most similar pixel similarity score and
-    %distance
+    %set of variables to store most similar distanc
     lowest=100000;
     lowest_x = -1;
     lowest_y = -1;
     
-    %loop through all possible pixels drawing a "frame" around each pixel.
-    %frame size is equal to segment size
     for x = 1+sg_width/2 : sw_width-sg_width/2
        for y = 1+sg_height/2 : sw_height-sg_height/2
-           %make sure coordinates are whole numbers
            x=round(x);
            y=round(y);
-           %crop a frame from window that is being searched and run the
-           %similarity function on them. store the resulting value at the
-           %position of the explored pixel
            test=search_window(x-sg_width/2:x-1+sg_width/2, y-sg_height/2:y-1+sg_height/2);
            dif(x,y)=support_cmp(src_segment, test,sg_width);
-           
-           %check if current position is new lowest and store it alongside
-           %its coordinate if it is
            if dif(x,y) < lowest
                lowest = dif(x,y);
                lowest_x = x;
@@ -43,6 +33,5 @@ function y = pixel_disp(src_segment, search_window)
            
        end
     end
-    %return all values as array
     y=[lowest lowest_x lowest_y];
     

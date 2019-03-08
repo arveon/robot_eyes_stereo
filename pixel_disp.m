@@ -30,7 +30,7 @@ function y = pixel_disp(src_segment, search_window)
            %crop a frame from window that is being searched and run the
            %similarity function on them. store the resulting value at the
            %position of the explored pixel
-           test=search_window(x-sg_width/2:x-1+sg_width/2, y-sg_height/2:y-1+sg_height/2);
+           test=search_window(round(x-sg_width/2):round(x-1+sg_width/2), round(y-sg_height/2):round(y-1+sg_height/2));
            dif(x,y)=support_cmp(src_segment, test,sg_width);
            
            %check if current position is new lowest and store it alongside
@@ -43,6 +43,7 @@ function y = pixel_disp(src_segment, search_window)
            
        end
     end
+    
     %return all values as array
-    y=[lowest lowest_x lowest_y];
+    y=lowest_x;
     

@@ -43,5 +43,5 @@ function x = pixel_disp(src_segment, search_window)
        end
     end
     %return all values as array
-    x=lowest_x;
+    x=[ lowest_x lowest_y ];
     

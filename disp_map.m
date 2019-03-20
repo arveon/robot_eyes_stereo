@@ -25,13 +25,9 @@ function x = disp_map(imf, ims)
         swlowy=y-half_sw_height;
         swhighy=y+half_sw_height;
         if swlowy < 1
-%              dif=abs(swlowy - 1);
-%              swhighy = swhighy+dif;
             swlowy = 1;
         end
         if swhighy > imf_height
-%                 dif=abs(swhighy-imf_height);
-%                 swlowy=swlowy-dif;
             swhighy=imf_height;
         end
             
@@ -47,40 +43,24 @@ function x = disp_map(imf, ims)
                 lowx = 1;
             end
             seg=imf(lowy:highy-1, lowx:highx-1);
-%             imshow(seg);
+            
             %calculate X coodrinate for search window
             swlowx=x-half_sw_width;
             swhighx=x+half_sw_width;
             
             if swhighx > imf_width 
-%                 dif=abs(swhighx-imf_width);
-%                 swlowx=swlowx-dif;
                 swhighx = imf_width;
             end
             if swlowx < 1
-%                 dif=abs(swlowx - 1);
-%                 swhighx = swhighx+dif;
                 swlowx = 1;
             end
             search_window = ims(swlowy:swhighy, swlowx:swhighx);
-%              imshow(search_window);
-%             size(search_window)
-%             subplot(1,2,1), imshow(seg,[]), title("seg");
-%             subplot(1,2,2), imshow(search_window,[]), title("win");
             
-%             imshow(search_window);
 % disp returns coordinates within search window
             res=pixel_disp(seg, search_window);
             dx=x - (swlowx + res(1));
             disp(y,x)= dx;
-%             disp(y,x)
-%             clc
-            
-%             x
-%              pause(2000);
-%              break;
         end   
-%          break;
         y
     end
     %normalise

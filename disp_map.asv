@@ -1,7 +1,7 @@
 function x = disp_map(imf, ims)
     [imf_width, imf_height] = size(imf);
     sg_size = [5 7];
-    sw_size = [15 7];
+    sw_size = [11 7];
     
     disp=zeros(imf_width,imf_height);
     disp(:,:)=-1;
@@ -72,6 +72,8 @@ function x = disp_map(imf, ims)
 % disp returns coordinates within search window
             res=pixel_disp(seg, search_window);
             dx=x - (swlowx + res(1));
+            dy=y - (swlowy + res(2));
+            dist = sqrt(dx^2+dy^2);
             disp(y,x)= dx;
 %             disp(y,x)
 %             clc
